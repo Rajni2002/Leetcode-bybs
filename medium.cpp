@@ -64,3 +64,47 @@ int totalFruit(vector<int> &fruits)
     }
     return maxLength;
 }
+
+void printAllPathInMaze(vector<vector<int> > &maze, int r, int c, int i)
+{
+    if (r == maze.size() - 1 && c == maze[0].size() - 1)
+    {
+        maze[r][c] = i;
+        for (int i = 0; i < maze.size(); i++)
+        {
+            for (int j = 0; j < maze[i].size(); j++)
+            {
+                    cout << maze[i][j] << " ";
+            }
+            cout << endl;
+        }
+        cout << endl;
+        return;
+    }
+    if (maze[r][c])
+        return;
+    maze[r][c] = i;
+    // UP
+    if (r > 0)
+    {
+        printAllPathInMaze(maze, r - 1, c, i + 1);
+    }
+    // DOWN
+    if (r < maze.size() - 1)
+    {
+        printAllPathInMaze(maze, r + 1, c, i + 1);
+    }
+    // Left
+    if (c > 0)
+    {
+        printAllPathInMaze(maze, r, c - 1, i + 1);
+    }
+    // Right
+    if (c < maze[0].size() - 1)
+    {
+        printAllPathInMaze(maze, r, c + 1, i + 1);
+    }
+    maze[r][c] = 0;
+    return;
+}
+
